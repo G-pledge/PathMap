@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL路径提取器</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <h1>🔗</h1>
+    <div class="header-buttons">
+      <button id="copyAllBtn" class="copy-all-btn" title="复制全部">📋</button>
+      <button id="exportBtn" class="export-btn" title="导出">📤</button>
+    </div>
+  </div>
+  <div class="search-filter-container">
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="搜索路径...">
+    </div>
+    <div class="filter-wrapper">
+      <select id="methodFilter">
+        <option value="all">所有方法</option>
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option>
+        <option value="DELETE">DELETE</option>
+      </select>
+    </div>
+    <div class="filter-wrapper">
+      <select id="copyOption">
+        <option value="full">复制完整URL</option>
+        <option value="path">仅复制路径</option>
+      </select>
+    </div>
+  </div>
+  <div class="url-list-container">
+    <ul id="urlList"></ul>
+  </div>
+  <div class="status-bar">
+    <span id="statusText">准备就绪</span>
+  </div>
+  
+  <!-- URL详细信息模态框 -->
+  <div id="urlDetailModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>URL详细信息</h2>
+      <div id="urlDetailContent"></div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
