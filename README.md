@@ -16,7 +16,7 @@ PathMap 是一个 Chrome 扩展插件，用于提取页面中所有 URL 路径�
 2. 在 Chrome 浏览器中打开 `chrome://extensions/`
 3. 启用 "开发者模式"
 4. 点击 "加载已解压的扩展程序"
-5. 选择项目中的 `dist` 目录
+5. 选择项目中的 `PathMap` 目录
 
 ## 使用方法
 
