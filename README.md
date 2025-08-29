@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/22041166/README.md)
 # PathMap
 
 PathMap 是一个 Chrome 扩展插件，用于提取页面中所有 URL 路径并进行标准化处理。
