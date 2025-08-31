@@ -1,0 +1,144 @@
+[
+	{
+        "Rule": "(?i)((access|admin|api|debug|auth|authorization|gpg|ops|ray|deploy|s3|certificate|aws|app|application|docker|es|elastic|elasticsearch|secret)[-_]{0,5}(key|token|secret|secretkey|pass|password|sid|debug))|(secret|password)([\"']?\\s*:\\s*|\\s*=\\s*)",
+        "NoReplace": true,
+        "Color": "red",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 3,
+        "ExtraTag": [
+            "敏感信息"
+        ]
+    },
+    {
+        "Rule": "\\b(([^\u003c\u003e()[\\]\\\\.,;:\\s@\"]+(\\.[^\u003c\u003e()[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+(cn|com|edu|gov|int|mil|net|org|biz|info|pro|name|museum|coop|aero|xxx|idv)))\\b",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForResponse": true,
+        "EnableForBody": true,
+        "Index": 10,
+        "ExtraTag": [
+            "email泄漏"
+        ],
+        "VerboseName": "email泄漏"
+    },
+    {
+        "Rule": "\\b(?:(?:\\+|00)86)?1(?:(?:3[\\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\\d])|(?:9[189]))\\d{8}\\b",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForResponse": true,
+        "EnableForBody": true,
+        "Index": 11,
+        "ExtraTag": [
+            "手机号泄漏"
+        ],
+        "VerboseName": "手机号泄漏"
+    },
+    {
+        "Rule": "\\b[1-9]\\d{5}(?:18|19|20)\\d{2}(?:0[1-9]|10|11|12)(?:0[1-9]|[1-2]\\d|30|31)\\d{3}[\\dXx]\\b",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForResponse": true,
+        "EnableForBody": true,
+        "Index": 13,
+        "ExtraTag": [
+            "身份证"
+        ],
+        "VerboseName": "身份证"
+    },
+    {
+        "Rule": "(?i)(access[_-]?(key|secret|id)|accesskey(secret|id)|secret[_-]?(key|id))",
+        "NoReplace": true,
+        "Color": "yellow",
+        "EnableForResponse": true,
+        "EnableForBody": true,
+        "Index": 15,
+        "ExtraTag": [
+            "OSS Key"
+        ],
+        "VerboseName": "OSS Key"
+    },
+    {
+        "Rule": "((ueditor\\.(config|all)\\.js))",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 27,
+        "ExtraTag": [
+            "UEditor测试点"
+        ],
+        "VerboseName": "UEditor测试点"
+    },
+    {
+        "Rule": "(kindeditor\\-(all\\-min|all)\\.js)",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 28,
+        "ExtraTag": [
+            "KindEditor测试点"
+        ],
+        "VerboseName": "KindEditor测试点"
+    },
+    {
+        "Rule": "((callback=)|(url=)|(request=)|(redirect_to=)|(jump=)|(to=)|(link=)|(domain=))",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForRequest": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 29,
+        "ExtraTag": [
+            "Url重定向参数"
+        ],
+        "VerboseName": "Url重定向参数"
+    },
+    {
+        "Rule": "(wap=|url=|link=|src=|source=|display=|sourceURl=|imageURL=|domain=)",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForRequest": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 30,
+        "ExtraTag": [
+            "SSRF测试参数"
+        ],
+        "VerboseName": "SSRF测试参数"
+    },
+    {
+        "Rule": "(Directory listing for|Parent Directory|Index of|folder listing:)",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 34,
+        "ExtraTag": [
+            "目录枚举点"
+        ],
+        "VerboseName": "目录枚举点"
+    },
+    {
+        "Rule": "((swagger-ui.html)|(\\\"swagger\\\":)|(Swagger UI)|(swaggerUi)|(swaggerVersion))",
+        "NoReplace": true,
+        "Color": "yellow",
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 56,
+        "ExtraTag": [
+            "SwaggerUI"
+        ],
+        "VerboseName": "SwaggerUI"
+    }
+]

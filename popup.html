@@ -8,15 +8,23 @@
 </head>
 <body>
   <div class="header">
-    <h1>🔗</h1>
+    <h1>PathMap</h1>
     <div class="header-buttons">
-      <button id="copyAllBtn" class="copy-all-btn" title="复制全部">📋</button>
-      <button id="exportBtn" class="export-btn" title="导出">📤</button>
+      <button id="copyAllBtn" class="copy-all-btn" title="复制全部">复制全部</button>
+      <button id="exportBtn" class="export-btn" title="导出">导出</button>
     </div>
   </div>
+  
+  <!-- 横向切换标签页 -->
+  <div class="tab-container">
+    <button class="tab-btn active" data-tab="api">API</button>
+    <button class="tab-btn" data-tab="static">静态资源</button>
+    <button class="tab-btn" data-tab="sensitive">敏感信息</button>
+  </div>
+  
   <div class="search-filter-container">
     <div class="search-wrapper">
-      <input type="text" id="searchInput" placeholder="搜索路径...">
+      <input type="text" id="searchInput" placeholder="搜索URL...">
     </div>
     <div class="filter-wrapper">
       <select id="methodFilter">
@@ -25,12 +33,15 @@
         <option value="POST">POST</option>
         <option value="PUT">PUT</option>
         <option value="DELETE">DELETE</option>
+        <option value="PATCH">PATCH</option>
+        <option value="HEAD">HEAD</option>
+        <option value="OPTIONS">OPTIONS</option>
       </select>
     </div>
     <div class="filter-wrapper">
       <select id="copyOption">
-        <option value="full">复制完整URL</option>
-        <option value="path">仅复制路径</option>
+        <option value="path">仅路径</option>
+        <option value="full">完整URL</option>
       </select>
     </div>
   </div>

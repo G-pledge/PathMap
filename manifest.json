@@ -32,7 +32,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["popup.html", "popup.js", "popup.css", "utils/special-page-handler.js"],
+      "resources": ["popup.html", "popup.js", "popup.css", "utils/special-page-handler.js", "rules.json"],
       "matches": ["<all_urls>"]
     }
   ],
