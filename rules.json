@@ -1,6 +1,6 @@
 [
 	{
-        "Rule": "(?i)((access|admin|api|debug|auth|authorization|gpg|ops|ray|deploy|s3|certificate|aws|app|application|docker|es|elastic|elasticsearch|secret)[-_]{0,5}(key|token|secret|secretkey|pass|password|sid|debug))|(secret|password)([\"']?\\s*:\\s*|\\s*=\\s*)",
+        "Rule": "([aA][cC][cC][eE][sS][sS]|[aA][dD][mM][iI][nN]|[aA][pP][iI]|[dD][eE][bB][uU][gG]|[aA][uU][tT][hH]|[aA][uU][tT][hH][oO][rR][iI][zZ][aA][tT][iI][oO][nN]|[gG][pP][gG]|[oO][pP][sS]|[rR][aA][yY]|[dD][eE][pP][lL][oO][yY]|[sS]3|[cC][eE][rR][tT][iI][fF][iI][cC][aA][tT][eE]|[aA][wW][sS]|[aA][pP][pP]|[aA][pP][pP][lL][iI][cC][aA][tT][iI][oO][nN]|[dD][oO][cC][kK][eE][rR]|[eE][sS]|[eE][lL][aA][sS][tT][iI][cC]|[eE][lL][aA][sS][tT][iI][cC][sS][eE][aA][rR][cC][hH]|[sS][eE][cC][rR][eE][tT])[-_]{0,5}([kK][eE][yY]|[tT][oO][kK][eE][nN]|[sS][eE][cC][rR][eE][tT]|[sS][eE][cC][rR][eE][tT][kK][eE][yY]|[pP][aA][sS][sS]|[pP][aA][sS][sS][wW][oO][rR][dD]|[sS][iI][dD]|[dD][eE][bB][uU][gG])|([sS][eE][cC][rR][eE][tT]|[pP][aA][sS][sS][wW][oO][rR][dD])([\"']?\\s*:\\s*|\\s*=\\s*)",
         "NoReplace": true,
         "Color": "red",
         "EnableForRequest": true,
@@ -49,7 +49,7 @@
         "VerboseName": "身份证"
     },
     {
-        "Rule": "(?i)(access[_-]?(key|secret|id)|accesskey(secret|id)|secret[_-]?(key|id))",
+        "Rule": "([aA][cC][cC][eE][sS][sS][-_]?([kK][eE][yY]|[sS][eE][cC][rR][eE][tT]|[iI][dD])|[aA][cC][cC][eE][sS][sS][kK][eE][yY]([sS][eE][cC][rR][eE][tT]|[iI][dD])|[sS][eE][cC][rR][eE][tT][-_]?([kK][eE][yY]|[iI][dD]))",
         "NoReplace": true,
         "Color": "yellow",
         "EnableForResponse": true,
@@ -59,6 +59,46 @@
             "OSS Key"
         ],
         "VerboseName": "OSS Key"
+    },
+    {
+        "Rule": "((\\[client\\])|\\[(mysql\\])|(\\[mysqld\\]))",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 12,
+        "ExtraTag": [
+            "MySQL配置"
+        ],
+        "VerboseName": "MySQL配置"
+    },
+    {
+        "Rule": "[-]+BEGIN [^\\s]+ PRIVATE KEY[-]",
+        "NoReplace": true,
+        "Color": "red",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForBody": true,
+        "Index": 14,
+        "ExtraTag": [
+            "RSA私钥"
+        ],
+        "VerboseName": "RSA私钥"
+    },
+    {
+        "Rule": "[\\w-.]+\\.oss\\.aliyuncs\\.com",
+        "NoReplace": true,
+        "Color": "red",
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 16,
+        "ExtraTag": [
+            "AliyunOSS"
+        ],
+        "VerboseName": "AliyunOSS"
     },
     {
         "Rule": "((ueditor\\.(config|all)\\.js))",
@@ -89,56 +129,195 @@
         "VerboseName": "KindEditor测试点"
     },
     {
-        "Rule": "((callback=)|(url=)|(request=)|(redirect_to=)|(jump=)|(to=)|(link=)|(domain=))",
-        "NoReplace": true,
-        "Color": "green",
-        "EnableForRequest": true,
-        "EnableForHeader": true,
-        "EnableForBody": true,
-        "Index": 29,
-        "ExtraTag": [
-            "Url重定向参数"
-        ],
-        "VerboseName": "Url重定向参数"
-    },
-    {
-        "Rule": "(wap=|url=|link=|src=|source=|display=|sourceURl=|imageURL=|domain=)",
-        "NoReplace": true,
-        "Color": "green",
-        "EnableForRequest": true,
-        "EnableForHeader": true,
-        "EnableForBody": true,
-        "Index": 30,
-        "ExtraTag": [
-            "SSRF测试参数"
-        ],
-        "VerboseName": "SSRF测试参数"
-    },
-    {
-        "Rule": "(Directory listing for|Parent Directory|Index of|folder listing:)",
+        "Rule": "((GET|POST|http[s]?).*?\\?.*?(token=|session\\w+=))",
         "NoReplace": true,
         "Color": "green",
         "EnableForRequest": true,
         "EnableForResponse": true,
         "EnableForHeader": true,
         "EnableForBody": true,
-        "Index": 34,
+        "Index": 32,
         "ExtraTag": [
-            "目录枚举点"
+            "Session/Token测试点"
         ],
-        "VerboseName": "目录枚举点"
+        "VerboseName": "Session/Token测试点"
     },
     {
-        "Rule": "((swagger-ui.html)|(\\\"swagger\\\":)|(Swagger UI)|(swaggerUi)|(swaggerVersion))",
+        "Rule": "((AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[a-zA-Z0-9]{16})",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 33,
+        "ExtraTag": [
+            "Amazon AK"
+        ],
+        "VerboseName": "Amazon AK"
+    },
+    {
+        "Rule": "((\"|')?[u](ser|name|ame|sername)(\"|'|\\s)?(:|=).*?,)",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 36,
+        "ExtraTag": [
+            "用户名泄漏点"
+        ],
+        "VerboseName": "用户名泄漏点"
+    },
+    {
+        "Rule": "((\"|')?[p](ass|wd|asswd|assword)(\"|'|\\s)?(:|=).*?,)",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 37,
+        "ExtraTag": [
+            "密码泄漏点"
+        ],
+        "VerboseName": "密码泄漏点"
+    },
+    {
+        "Rule": "((ghp|ghu)\\_[a-zA-Z0-9]{36})",
+        "NoReplace": true,
+        "Color": "red",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 41,
+        "ExtraTag": [
+            "GithubAccessToken"
+        ],
+        "VerboseName": "GithubAccessToken"
+    },
+    {
+        "Rule": "(jdbc:[a-z:]+://[A-Za-z0-9\\.\\-_:;=/@?,\u0026]+)",
+        "NoReplace": true,
+        "Color": "green",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 43,
+        "ExtraTag": [
+            "JDBC连接参数"
+        ],
+        "VerboseName": "JDBC连接参数"
+    },
+    {
+        "Rule": "([c|C]or[p|P]id|[c|C]orp[s|S]ecret)",
+        "NoReplace": true,
+        "Color": "red",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 46,
+        "ExtraTag": [
+            "Wecom Key(Secret)"
+        ],
+        "VerboseName": "Wecom Key(Secret)"
+    },
+    {
+        "Rule": "([a-zA-Z]:\\\\(\\w+\\\\)+|[a-zA-Z]:\\\\\\\\(\\w+\\\\\\\\)+)|(/(bin|dev|home|media|opt|root|sbin|sys|usr|boot|data|etc|lib|mnt|proc|run|srv|tmp|var)/[^\u003c\u003e()[\\],;:\\s\"]+/)",
+        "NoReplace": true,
+        "Color": "red",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForBody": true,
+        "Index": 49,
+        "ExtraTag": [
+            "操作系统路径"
+        ],
+        "VerboseName": "操作系统路径"
+    },
+    {
+        "Rule": "(sonar.{0,50}(?:\"|\\'|`)?[0-9a-f]{40}(?:\"|\\'|`)?)",
+        "NoReplace": true,
+        "Color": "red",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 51,
+        "ExtraTag": [
+            "Sonarqube Token"
+        ],
+        "VerboseName": "Sonarqube Token"
+    },
+    {
+        "Rule": "((us(-gov)?|ap|ca|cn|eu|sa)-(central|(north|south)?(east|west)?)-\\d)",
+        "NoReplace": true,
+        "Color": "red",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 52,
+        "ExtraTag": [
+            "Amazon AWS Region泄漏"
+        ],
+        "VerboseName": "Amazon AWS Region泄漏"
+    },
+    {
+        "Rule": "(ya29\\.[0-9A-Za-z_-]+)",
+        "NoReplace": true,
+        "Color": "red",
+        "EnableForRequest": true,
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 54,
+        "ExtraTag": [
+            "Oauth Access Key"
+        ],
+        "VerboseName": "Oauth Access Key"
+    },
+    {
+        "Rule": "((corp)(id|secret))",
         "NoReplace": true,
         "Color": "yellow",
         "EnableForResponse": true,
         "EnableForHeader": true,
         "EnableForBody": true,
-        "Index": 56,
+        "Index": 58,
         "ExtraTag": [
-            "SwaggerUI"
+            "WeCom Key"
         ],
-        "VerboseName": "SwaggerUI"
+        "VerboseName": "WeCom Key"
+    },
+    {
+        "Rule": "(jdbc:[a-z:]+://[a-z0-9\\.\\-_:;=/@?,\u0026]+)",
+        "NoReplace": true,
+        "Color": "yellow",
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 59,
+        "ExtraTag": [
+            "JDBC Connection"
+        ],
+        "VerboseName": "JDBC Connection"
+    },
+    {
+        "Rule": "(((access)(|-|_)(key)(|-|_)(id|secret))|(LTAI[a-z0-9]{12,20}))",
+        "NoReplace": true,
+        "Color": "yellow",
+        "EnableForResponse": true,
+        "EnableForHeader": true,
+        "EnableForBody": true,
+        "Index": 60,
+        "ExtraTag": [
+            "云主机密钥"
+        ],
+        "VerboseName": "云主机密钥"
     }
 ]
